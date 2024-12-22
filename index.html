@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sum and Trigonometric Values</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .output {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sum of Arguments and Trigonometric Values</h1>
+    <div id="output" class="output"></div>
+
+    <script>
+        // Function to calculate the sum of arguments
+        function sumOfArguments(...args) {
+            return args.reduce((acc, curr) => acc + curr, 0);
+        }
+
+        // Function to convert degrees to radians
+        function degreesToRadians(degrees) {
+            return (degrees * Math.PI) / 180;
+        }
+
+        // Function to generate trigonometric values for an angle
+        function getTrigonometricValues(angle) {
+            const radians = degreesToRadians(angle);
+            return {
+                sin: Math.sin(radians).toFixed(2),
+                cos: Math.cos(radians).toFixed(2),
+                tan: Math.tan(radians).toFixed(2),
+            };
+        }
+
+        // Displaying the sum of arguments
+        const outputDiv = document.getElementById("output");
+        const numbers = [10, 20, 30, 40, 50]; // Example arguments
+        const sum = sumOfArguments(...numbers);
+        let outputHtml = `<h2>Sum of Arguments:</h2><p>${numbers.join(" + ")} = ${sum}</p>`;
+
+        // Displaying trigonometric values for specific angles
+        const angles = [0, 30, 45, 60, 90];
+        outputHtml += "<h2>Trigonometric Values:</h2>";
+        outputHtml += "<table border='1' style='margin: 0 auto; text-align: center;'>";
+        outputHtml += "<tr><th>Angle (°)</th><th>sin</th><th>cos</th><th>tan</th></tr>";
+        angles.forEach(angle => {
+            const { sin, cos, tan } = getTrigonometricValues(angle);
+            outputHtml += `<tr><td>${angle}</td><td>${sin}</td><td>${cos}</td><td>${tan}</td></tr>`;
+        });
+        outputHtml += "</table>";
+
+        // Add output to the page
+        outputDiv.innerHTML = outputHtml;
+    </script>
+</body>
+</html>
